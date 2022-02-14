@@ -1,0 +1,19 @@
+.category__row {
+  /* background-color: #242b2e; */
+  background-color: #ff930f;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 1px;
+  margin: 0px 0px 0px 0px;
+}
+.category__btn {
+  /* background-color: white; */
+  /* color: red; */
+  transition: transform 400ms ease-in-out;
+}
+.category__btn:hover {
+  transform: scale(1.2);
+}

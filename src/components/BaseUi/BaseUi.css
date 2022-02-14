@@ -1,0 +1,29 @@
+.baseui {
+  display: flex;
+  justify-content: space-between;
+  background-color: #242b2e;
+  height: 50px;
+}
+ul {
+  display: flex;
+  flex-direction: row;
+}
+ul li {
+  list-style-type: none;
+  margin: 11px 14px 0px 0px;
+}
+
+.baseui__navbar button {
+  background-color: #5a20cb;
+  height: 30px;
+  width: 80px;
+  padding: 0px;
+  font-size: 1.1rem;
+  color: #cad5e2;
+  transition: transform 480ms ease-in-out;
+}
+
+.baseui__navbar button:hover {
+  transform: scale(1.08);
+  background-color: #ff6263;
+}

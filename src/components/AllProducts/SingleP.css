@@ -1,0 +1,19 @@
+.singleP {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: red;
+  height: 75vh;
+  width: 20vw;
+}
+.singleP img {
+  height: 160px;
+  width: 170px;
+}
+.singleP__title {
+  display: flex;
+  flex-wrap: wrap;
+}
+.singleP__button {
+  display: flex;
+  justify-content: space-around;
+}

@@ -1,0 +1,40 @@
+.singleProduct {
+  position: relative;
+  margin: 10px 0px 0px 0px;
+  transition: transform 400ms ease-in-out;
+}
+.singleProduct:hover {
+  transform: scale(1.01);
+}
+.singleProduct__card {
+  width: 315px;
+  min-height: 312px;
+  display: flex;
+  justify-content: center;
+  align-items: space-between;
+  position: relative;
+}
+.singleProduct__cardbtn {
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  bottom: 0;
+  margin: 10px;
+  padding: 10px;
+}
+.singleProduct__cardbtn Button {
+  transition: transform 300ms ease-in-out;
+}
+.singleProduct__cardbtn Button:hover {
+  transform: scale(1.03);
+}
+.singleProduct__img {
+  max-height: 160px;
+  max-width: 200px;
+  margin: auto auto;
+  display: flex;
+  justify-content: center;
+}
+.singleProduct__cardtxt {
+  /* font-size: 1px; */
+}
