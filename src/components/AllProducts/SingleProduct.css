@@ -36,5 +36,5 @@
   justify-content: center;
 }
 .singleProduct__cardtxt {
-  /* font-size: 1px; */
+  font-weight: bold;
 }
