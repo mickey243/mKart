@@ -4,6 +4,7 @@ import { authAction } from "./redux/AuthSlice";
 
 import AllProducts from "./components/AllProducts/AllProducts";
 function App() {
+  document.title = "mKart";
   const isLogin = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
   console.log(isLogin);
