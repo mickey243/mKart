@@ -1,5 +1,7 @@
 import React from "react";
 import "./SingleProduct.css";
+import { useDispatch } from "react-redux";
+import { productCartSliceAction } from "../../redux/ProductStore";
 import {
   Card,
   CardImg,
@@ -13,7 +15,12 @@ import {
 
 const SingleProducts = ({ data }) => {
   const { image, category, description, price, title } = data;
-  //   src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+  const dispatch = useDispatch();
+
+  const cartHandler = () => {
+    dispatch(productCartSliceAction.addProductToCart());
+  };
+
   return (
     <Container className="singleProduct">
       <Card className="singleProduct__card" height="600px">
@@ -28,7 +35,11 @@ const SingleProducts = ({ data }) => {
             {title}
           </CardTitle>
           <div className="singleProduct__cardbtn">
-            <Button color="primary" className="text-dark mx-2">
+            <Button
+              color="primary"
+              className="text-dark mx-2"
+              onClick={cartHandler}
+            >
               Add Cart
             </Button>
             <Button color="warning" className="text-dark">

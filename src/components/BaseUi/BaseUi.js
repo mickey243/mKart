@@ -6,6 +6,9 @@ import { productCategorySliceAction } from "../../redux/ProductCategoty";
 const BaseUi = (props) => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const productTotalCount = useSelector(
+    (state) => state.productStore.totalProductCount
+  );
 
   const homeHandler = () => {
     dispatch(productCategorySliceAction.removeCategory());
@@ -25,6 +28,11 @@ const BaseUi = (props) => {
         </div>
         <div className="baseui__navbar">
           <ul>
+            <li>
+              <button className="baseui__btn cart__btn" style={{ width: 200 }}>
+                {productTotalCount} cart
+              </button>
+            </li>
             <li>
               <button className="baseui__btn">About</button>
             </li>
