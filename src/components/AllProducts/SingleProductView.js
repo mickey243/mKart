@@ -9,7 +9,7 @@ import { getSingleProduct } from "../../fakeStoreAPI/products";
 const SingleProductView = () => {
   const { productId } = useParams();
   const [productData, setProductData] = useState([]);
-  const { rate } = productData.rating;
+  // const { rate } = productData.rating;
   // TODO:fetching the single product.
   useEffect(() => {
     getSingleProduct(productId).then((product) => setProductData(product));
@@ -35,14 +35,9 @@ const SingleProductView = () => {
               <p className="my-3">{productData.description}</p>
               <p>₹ {productData.price}</p>
               <div className="singleproduct__details_rating">
-                {rate}
+                4
                 <span>
-                  <ReactStars
-                    size={30}
-                    value={rate}
-                    edit={false}
-                    isHalf={true}
-                  />
+                  <ReactStars size={30} value={4} edit={false} isHalf={true} />
                 </span>
               </div>
               <button>Add Cart</button>
