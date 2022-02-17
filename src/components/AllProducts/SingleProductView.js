@@ -1,48 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row } from "reactstrap";
 import BaseUi from "../BaseUi/BaseUi";
 import "./SingleProductView.css";
 import ReactStars from "react-rating-stars-component";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getSingleProduct } from "../../fakeStoreAPI/products";
 const SingleProductView = () => {
-  const firstExample = {
-    size: 30,
-    value: 3.5,
-    edit: false,
-    isHalf: true,
-  };
+  const { productId } = useParams();
+  const [productData, setProductData] = useState([]);
+  const { rate } = productData.rating;
+  // TODO:fetching the single product.
+  useEffect(() => {
+    getSingleProduct(productId).then((product) => setProductData(product));
+  }, [productId]);
+  const allProductStore = useSelector(
+    (state) => state.allProductStoreSlice.allProduct[0]
+  );
+  console.log(productData);
   return (
     <BaseUi>
       <div className="singleproduct">
         <Row>
           <Col xs={12} sm={12} md={6}>
             <div className="singleproduct__picture">
-              <img
-                src="https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"
-                alt=""
-              />
+              <img src={productData.image} alt={productData.title} />
             </div>
           </Col>
           <Col xs={12} md={6}>
             <div className="singleproduct__details">
               <h1 style={{ fontSize: "3rem", fontWeight: "bold" }}>
-                Mens Cotton Jacket
+                {productData.title}
               </h1>
-              <p className="my-3">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae
-                iste commodi laudantium delectus molestias unde impedit suscipit
-                officia soluta eius ipsum rem reiciendis in facilis architecto
-                quos fuga, esse nobis? Fugiat ducimus dicta consectetur dolor ea
-                rem deserunt, commodi ex enim. Voluptate, eaque. Non sit
-                assumenda, culpa eos enim laboriosam voluptas. Facilis, ad quod
-                repellendus exercitationem dignissimos deserunt at rem.
-              </p>
-              <p>₹ 400</p>
+              <p className="my-3">{productData.description}</p>
+              <p>₹ {productData.price}</p>
               <div className="singleproduct__details_rating">
-                2.3
+                {rate}
                 <span>
                   <ReactStars
                     size={30}
-                    value={2.5}
+                    value={rate}
                     edit={false}
                     isHalf={true}
                   />

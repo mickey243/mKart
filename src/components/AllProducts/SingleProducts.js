@@ -12,9 +12,10 @@ import {
   Button,
   Container,
 } from "reactstrap";
+import { Link, NavLink } from "react-router-dom";
 
 const SingleProducts = ({ data }) => {
-  const { image, category, description, price, title } = data;
+  const { image, category, description, price, title, id } = data;
   const dispatch = useDispatch();
 
   const cartHandler = () => {
@@ -42,9 +43,16 @@ const SingleProducts = ({ data }) => {
             >
               Add Cart
             </Button>
-            <Button color="warning" className="text-dark">
+            {/* <Button color="warning" className="text-dark">
               View Product
-            </Button>
+            </Button> */}
+            <NavLink
+              target="_blank"
+              className="btn btn-warning"
+              to={`/product/${id}`}
+            >
+              View Product
+            </NavLink>
           </div>
         </CardBody>
       </Card>

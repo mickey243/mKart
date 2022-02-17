@@ -13,3 +13,9 @@ export const getAllCategories = async () => {
   );
   return data;
 };
+export const getSingleProduct = async (productId) => {
+  const { data } = await Axios.get(
+    `https://fakestoreapi.com/products/${productId}`
+  );
+  return data;
+};

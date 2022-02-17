@@ -5,28 +5,23 @@ import SingleProducts from "./SingleProducts";
 import { getAllProducts } from "../../fakeStoreAPI/products";
 import { Col, Row } from "reactstrap";
 import { useSelector } from "react-redux";
+import jsonData from "../../redux/DataFromAPIManually";
 
 const AllProducts = () => {
-  const [allProduct, setAllProduct] = useState([]);
-
-  const result = useSelector((state) => state.productCategoryStore.anyCategory);
-  const isResult = useSelector(
+  // const [allProduct, setAllProduct] = useState([]);
+  let allProduct = jsonData;
+  const categoryStoreByClick = useSelector(
+    (state) => state.productCategoryStore.anyCategory
+  );
+  const isAnyCategoryClick = useSelector(
     (state) => state.productCategoryStore.isAnyCategory
   );
-
-  const getAllProducts = async () => {
-    const { data } = await Axios.get("https://fakestoreapi.com/products");
-    if (isResult) {
-      const results = data.filter((item) => item.category === result);
-      setAllProduct(results);
-    } else {
-      setAllProduct(data);
-    }
-  };
-
-  useEffect(() => {
-    getAllProducts();
-  }, [result, isResult]);
+  if (isAnyCategoryClick) {
+    const results = allProduct.filter(
+      (item) => item.category === categoryStoreByClick
+    );
+    allProduct = results;
+  }
 
   return (
     <BaseUi>
