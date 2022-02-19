@@ -17,7 +17,8 @@
 .category__btn:hover {
   transform: scale(1.2);
 }
-/* .category__all {
+.category__col {
   display: flex;
-  justify-content: space-around;
-} */
+  flex-direction: row;
+  justify-content: space-between;
+}

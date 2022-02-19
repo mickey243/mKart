@@ -10,7 +10,6 @@ const CartPageView = () => {
   const { products, totalProductCount, totalAmount } = useSelector(
     (state) => state.productStore
   );
-  // console.log(products);
   const removeProductHandler = (id) => {
     dispatch(productCartSliceAction.removeProductFromCart(id));
   };

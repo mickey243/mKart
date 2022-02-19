@@ -11,7 +11,7 @@ const AllProducts = () => {
   useEffect(() => {
     dispatch(getAllProducts());
     dispatch(getAllCategory());
-  }, []);
+  }, [getAllProducts]);
 
   // fetching all the data from redux warehouse store.
   var { productList, productsStatus } = useSelector(
@@ -19,6 +19,19 @@ const AllProducts = () => {
   );
   // end
 
+  // fetching the category and modifying the output
+  const isAnyCategoryExist = useSelector(
+    (state) => state.productCategoryStore.isAnyCategory
+  );
+  const CategoryName = useSelector(
+    (state) => state.productCategoryStore.anyCategory
+  );
+  const newData = useSelector((state) => state.warehouse.products.productList);
+  if (isAnyCategoryExist) {
+    const result = newData.filter((item) => item.category === CategoryName);
+    productList = result;
+  }
+  // end
   return (
     <BaseUi>
       <CategoriesUi />
