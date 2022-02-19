@@ -17,3 +17,7 @@
 .category__btn:hover {
   transform: scale(1.2);
 }
+/* .category__all {
+  display: flex;
+  justify-content: space-around;
+} */

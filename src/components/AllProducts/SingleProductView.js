@@ -7,17 +7,26 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getSingleProduct } from "../../fakeStoreAPI/products";
 const SingleProductView = () => {
+  // fetching all the data from redux warehouse store.
   const { productId } = useParams();
+  const [productDatas, setProductDatas] = useState();
+  var productList = useSelector(
+    (state) => state.warehouse.products.productList
+  );
+  //  var productList = useSelector(
+  //    (state) => state.warehouse.products.productList
+  //  );
+  useEffect(() => {
+    setProductDatas(productList);
+  }, []);
+
   const [productData, setProductData] = useState([]);
-  const { rate } = productData.rating;
+  // const { rate } = productData.rating;
   // TODO:fetching the single product.
   useEffect(() => {
     getSingleProduct(productId).then((product) => setProductData(product));
   }, [productId]);
-  const allProductStore = useSelector(
-    (state) => state.allProductStoreSlice.allProduct[0]
-  );
-  console.log(productData);
+
   return (
     <BaseUi>
       <div className="singleproduct">
@@ -35,14 +44,9 @@ const SingleProductView = () => {
               <p className="my-3">{productData.description}</p>
               <p>₹ {productData.price}</p>
               <div className="singleproduct__details_rating">
-                {rate}
+                4
                 <span>
-                  <ReactStars
-                    size={30}
-                    value={rate}
-                    edit={false}
-                    isHalf={true}
-                  />
+                  <ReactStars size={30} value={4} edit={false} isHalf={true} />
                 </span>
               </div>
               <button>Add Cart</button>
