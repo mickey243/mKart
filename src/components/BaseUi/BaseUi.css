@@ -27,3 +27,22 @@ ul li {
   transform: scale(1.08);
   background-color: #ff6263;
 }
+
+.cart__btn {
+  text-decoration: none;
+  padding: 0px 77px 3px 20px;
+  border: 1px solid #cccccc;
+  background-color: #5a20cb;
+  font-size: 1.1rem;
+  transition: transform 480ms ease-in-out;
+  color: #fff;
+  text-align: center;
+  /* width: 200px; */
+  display: flex;
+  justify-content: space-between;
+}
+.cart__btn:hover {
+  transform: scale(1.08);
+  color: #fff;
+  background-color: #ff6263;
+}
