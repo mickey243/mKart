@@ -2,51 +2,94 @@ import React from "react";
 import "./CartPageView.css";
 import { Card, Col, Row, Input } from "reactstrap";
 import BaseUi from "../BaseUi/BaseUi";
+import { useSelector, useDispatch } from "react-redux";
+import { productCartSliceAction } from "../../redux/ProductStore";
 
 const CartPageView = () => {
+  const dispatch = useDispatch();
+  const { products, totalProductCount, totalAmount } = useSelector(
+    (state) => state.productStore
+  );
+  // console.log(products);
+  const removeProductHandler = (id) => {
+    dispatch(productCartSliceAction.removeProductFromCart(id));
+  };
+  const addProductHandler = (item) => {
+    const { id, title, price, image } = item;
+    dispatch(
+      productCartSliceAction.addProductToCart({
+        id,
+        title,
+        price,
+        image,
+      })
+    );
+  };
   return (
     <BaseUi>
       <Row className="text-center">
         <h1>Check Out Page</h1>
-        <Col xs={12} sm={12} md={6}>
+        <Col xs={12} sm={12} md={9}>
           <div className="cartpage__products">
-            <Card className="cartpage__product_card">
-              <div className="cartpage__products__img">
-                <img
-                  src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
-                  alt="product"
-                />
-              </div>
-              <div className="cartpage__products__info">
-                <p>Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops</p>
-                <p>Quantity : 10</p>
-                <p>Total : 1000</p>
-                <div className="cartpage__products__info_btn">
-                  <button className="cart__product_btn_add mx-2">Add</button>
-                  <button className="cart__product_btn_remove">Remove</button>
+            {!totalProductCount && <h1>Cart is Empty...</h1>}
+            {products.map((item, index) => (
+              <Card className="cartpage__product_card" key={index}>
+                <div className="cartpage__products__img">
+                  <img src={item.image} alt="product" />
                 </div>
-              </div>
-            </Card>
+                <div className="cartpage__products__info">
+                  <p>{item.title}</p>
+                  <p>Quantity : {item.quantity}</p>
+                  <p>Price : {item.price}</p>
+                  <p>Total : {item.totalPrice}</p>
+                  <div className="cartpage__products__info_btn">
+                    <button
+                      onClick={() =>
+                        addProductHandler({
+                          id: item.id,
+                          title: item.title,
+                          totalPrice: item.totalPrice,
+                          image: item.image,
+                          price: item.price,
+                        })
+                      }
+                      className="cart__product_btn_add mx-2"
+                    >
+                      Add
+                    </button>
+                    <button
+                      onClick={() => removeProductHandler(item.id)}
+                      className="cart__product_btn_remove"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </Card>
+            ))}
           </div>
         </Col>
-        <Col xs={12} sm={12} md={6}>
-          <div className="cartpage__checkout">
-            {/* <Card> */}
-            <p>Total Amount: 1000 </p>
-            <p>Total Count: 15 </p>
 
-            <Input type="select" className="mx-5">
-              <option>Please Select Payment Method</option>
-              <option>C.O.D</option>
-              <option>PhonePay</option>
-              <option>GooglePay</option>
-            </Input>
+        <Col xs={12} sm={12} md={3}>
+          {totalProductCount !== 0 && (
+            <div className="cartpage__checkout">
+              <p>Total Amount: {totalAmount} </p>
+              <p>Total Count: {totalProductCount} </p>
+              <Input type="select" className="mx-5">
+                <option>Please Select Payment Method</option>
+                <option>C.O.D</option>
+                <option>PhonePay</option>
+                <option>GooglePay</option>
+              </Input>
 
-            <button className="mx-5 cartpage__checkout__btn">Check Out</button>
-            {/* </Card> */}
-
-            <div className="cartpage__checkout__payment"></div>
-          </div>
+              <button
+                onClick={() => dispatch(productCartSliceAction.checkOutStore())}
+                className="mx-5 cartpage__checkout__btn"
+              >
+                Check Out
+              </button>
+            </div>
+          )}
         </Col>
       </Row>
     </BaseUi>
