@@ -5,10 +5,8 @@ import { productCartSliceAction } from "../../redux/ProductStore";
 import {
   Card,
   CardImg,
-  CardText,
   CardBody,
   CardTitle,
-  CardSubtitle,
   Button,
   Container,
 } from "reactstrap";
@@ -19,7 +17,14 @@ const SingleProducts = ({ data }) => {
   const dispatch = useDispatch();
 
   const cartHandler = () => {
-    dispatch(productCartSliceAction.addProductToCart());
+    dispatch(
+      productCartSliceAction.addProductToCart({
+        id,
+        title,
+        totalPrice: price,
+        image,
+      })
+    );
   };
 
   return (
@@ -47,7 +52,7 @@ const SingleProducts = ({ data }) => {
               View Product
             </Button> */}
             <NavLink
-              target="_blank"
+              // target="_blank"
               className="btn btn-warning"
               to={`/product/${id}`}
             >
