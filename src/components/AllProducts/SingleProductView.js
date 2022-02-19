@@ -3,10 +3,12 @@ import { Col, Row } from "reactstrap";
 import BaseUi from "../BaseUi/BaseUi";
 import "./SingleProductView.css";
 import ReactStars from "react-rating-stars-component";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getSingleProduct } from "../../fakeStoreAPI/products";
+import { productCartSliceAction } from "../../redux/ProductStore";
 const SingleProductView = () => {
+  const dispatch = useDispatch();
   // fetching all the data from redux warehouse store.
   const { productId } = useParams();
   const [productDatas, setProductDatas] = useState();
@@ -26,6 +28,17 @@ const SingleProductView = () => {
   useEffect(() => {
     getSingleProduct(productId).then((product) => setProductData(product));
   }, [productId]);
+
+  const cartHandler = () => {
+    dispatch(
+      productCartSliceAction.addProductToCart({
+        id: productData.id,
+        title: productData.title,
+        totalPrice: productData.price,
+        image: productData.image,
+      })
+    );
+  };
 
   return (
     <BaseUi>
@@ -49,7 +62,7 @@ const SingleProductView = () => {
                   <ReactStars size={30} value={4} edit={false} isHalf={true} />
                 </span>
               </div>
-              <button>Add Cart</button>
+              <button onClick={cartHandler}>Add Cart</button>
             </div>
           </Col>
         </Row>
