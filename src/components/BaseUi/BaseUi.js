@@ -2,27 +2,28 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./BaseUi.css";
 import { productCategorySliceAction } from "../../redux/ProductCategoty";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 const BaseUi = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const productTotalCount = useSelector(
     (state) => state.productStore.totalProductCount
   );
-  // <NavLink
-  //           // target="_blank"
-  //           className="btn btn-warning"
-  //           to={`/product/${id}`}
-  //         >
-  //           View Product
-  //         </NavLink>
 
   return (
     <>
       <div className="baseui">
         <div className="baseui__logo">
           <ul>
-            <li style={{ color: "white", cursor: "pointer" }}>Home</li>
+            <li
+              style={{ color: "white", cursor: "pointer" }}
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              Home
+            </li>
           </ul>
         </div>
         <div className="baseui__navbar">

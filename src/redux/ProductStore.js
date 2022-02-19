@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -5,6 +6,7 @@ const initialState = {
   totalProductCount: 0,
   products: [],
 };
+
 const productCartSlice = createSlice({
   name: "prductSlice",
   initialState: initialState,
@@ -15,6 +17,7 @@ const productCartSlice = createSlice({
       const existingItem = state.products.find(
         (item) => item.id === newItem.id
       );
+
       if (!existingItem) {
         state.products.push({
           id: newItem.id,
@@ -22,10 +25,12 @@ const productCartSlice = createSlice({
           quantity: 1,
           totalPrice: newItem.totalPrice,
           image: newItem.image,
+          price: newItem.totalPrice,
         });
+        state.totalAmount = state.totalAmount + newItem.totalPrice;
       } else {
         existingItem.quantity++;
-        existingItem.totalPrice += newItem.totalPrice;
+        existingItem.totalPrice = existingItem.quantity * existingItem.price;
       }
     },
     removeProductFromCart(state, action) {
@@ -36,7 +41,13 @@ const productCartSlice = createSlice({
         state.products = state.products.filter((item) => item.id !== id);
       } else {
         existingItem.quantity--;
+        existingItem.totalPrice -= existingItem.price;
       }
+    },
+    checkOutStore(state) {
+      state.totalAmount = 0;
+      state.totalProductCount = 0;
+      state.products = [];
     },
   },
 });
