@@ -8,8 +8,8 @@ const AllRouters = () => {
   return (
     <Router>
       <Routes>
-        {/* <Route exact path="/" element={<AllProducts />} /> */}
-        <Route exact path="/" element={<CartPageView />} />
+        <Route exact path="/" element={<AllProducts />} />
+        <Route exact path="/cart" element={<CartPageView />} />
         <Route path="/product/:productId" element={<SingleProductView />} />
         <Route
           path="*"
