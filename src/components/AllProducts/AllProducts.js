@@ -5,6 +5,7 @@ import SingleProducts from "./SingleProducts";
 import { Col, Row } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllProducts, getAllCategory } from "../../redux/WareHouse";
+import jsonData from "../../redux/DataFromAPIManually";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
@@ -36,8 +37,8 @@ const AllProducts = () => {
     <BaseUi>
       <CategoriesUi />
       <Row>
-        {productsStatus === "loading" && <h1>Loading API...</h1>}
-        {productsStatus === "failed" && <h1>Error while fetching api</h1>}
+        {/* {productsStatus === "loading" && <h1>Loading API...</h1>}
+        {productsStatus === "failed" && <h1>Error while fetching api</h1>} */}
         {productsStatus === "success" &&
           productList.map((item) => (
             <Col

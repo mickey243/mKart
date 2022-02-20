@@ -8,7 +8,7 @@
 .cartpage__product_card {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: baseline;
   margin-bottom: 2px;
   padding: 10px;
   /* width: 40vw; */
@@ -22,10 +22,10 @@
   width: 100px;
 }
 .cartpage__products__info {
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
   font-size: 0.9rem;
-  align-items: flex-start;
+  /* align-items: flex-start; */
 }
 
 .cartpage__products__info button {

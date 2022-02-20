@@ -1,0 +1,15 @@
+.login__card {
+  display: flex;
+  justify-content: center;
+  align-items: initial;
+  width: 40vw;
+  height: 30vh;
+  margin: auto auto auto auto;
+}
+.login__card_col {
+  margin-top: 14%;
+}
+.login__card Button {
+  width: 15rem;
+  margin: auto;
+}

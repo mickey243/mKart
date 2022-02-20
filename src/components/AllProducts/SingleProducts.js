@@ -1,6 +1,6 @@
 import React from "react";
 import "./SingleProduct.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { productCartSliceAction } from "../../redux/ProductStore";
 import {
   Card,
@@ -10,13 +10,18 @@ import {
   Button,
   Container,
 } from "reactstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const SingleProducts = ({ data }) => {
+  const navigate = useNavigate();
   const { image, category, description, price, title, id } = data;
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   const cartHandler = () => {
+    if (!isAuthenticated) {
+      return navigate("/login");
+    }
     dispatch(
       productCartSliceAction.addProductToCart({
         id,

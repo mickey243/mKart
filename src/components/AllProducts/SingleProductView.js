@@ -4,10 +4,11 @@ import BaseUi from "../BaseUi/BaseUi";
 import "./SingleProductView.css";
 import ReactStars from "react-rating-stars-component";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getSingleProduct } from "../../fakeStoreAPI/products";
 import { productCartSliceAction } from "../../redux/ProductStore";
 const SingleProductView = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   // fetching all the data from redux warehouse store.
   const { productId } = useParams();
@@ -15,9 +16,7 @@ const SingleProductView = () => {
   var productList = useSelector(
     (state) => state.warehouse.products.productList
   );
-  //  var productList = useSelector(
-  //    (state) => state.warehouse.products.productList
-  //  );
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   useEffect(() => {
     setProductDatas(productList);
   }, []);
@@ -30,6 +29,9 @@ const SingleProductView = () => {
   }, [productId]);
 
   const cartHandler = () => {
+    if (!isAuthenticated) {
+      return navigate("/login");
+    }
     dispatch(
       productCartSliceAction.addProductToCart({
         id: productData.id,
