@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Axios from "axios";
+import jsonData from "./DataFromAPIManually";
 
 // to get the all the product initailly.
 export const getAllProducts = createAsyncThunk(
